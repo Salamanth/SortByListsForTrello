@@ -2,8 +2,9 @@
   "manifest_version": 2,
 
   "name": "Trello Sort Cards by Steps",
-  "description": "Organizes cards by steps",
+  "description": "Organizes cards by Kanban steps (Todo, Doing, Done) in Trello",
   "version": "0.1",
+  "icons": { "128": "icon.png" },
 
   "content_scripts": [
     {
@@ -13,7 +14,6 @@
   ],
 
   "permissions": [
-    "activeTab",
-    "https://ajax.googleapis.com/"
+    "activeTab"
   ]
 }

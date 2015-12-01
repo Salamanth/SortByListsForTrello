@@ -48,6 +48,8 @@ cardContainer = '.list-card-container';
 cardContentContainer = '.js-card';
 cardListParentContainer = '.list-card-position';
 cardListContainer = 'strong';
+cardNewContainer = '.list-card';
+cardLink = 'a.list-card-title';
 
 
 /**
@@ -225,4 +227,13 @@ $('body').on('click', '.js-sort-by-step', function () {
   $(sortPopoverContainer).removeClass('is-shown');
   $(sortPopoverContentContainer).empty();
   $(sortMainContainer + ' ' + sortLabelContainer).html(langSortShortLabel);
+});
+
+
+/**
+ * Listener : When a card is clicked
+ */
+$('body').on('click', cardNewContainer, function (e) {
+  var link = $(this).find(cardLink);
+  document.location.href = link.attr('href');
 });
