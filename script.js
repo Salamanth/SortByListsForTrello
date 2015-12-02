@@ -33,12 +33,12 @@ sections = {
 }
 
 // Boards
-boardsArray = [];
+_boardsArray = [];
 boardsContainer = '.window-module';
 boardTitle = '.window-module-title h3 a';
 
 // Cards
-cardsArray = {
+_cardsArray = {
   todo: [],
   doing: [],
   done: []
@@ -143,7 +143,7 @@ var insertContent = function () {
  * @param section - the section to insert
  */
 var insertSection = function (section) {
-  var content = 
+  var content =
     '<div class="' + boardsContainer.replace('.', '') + ' ' + section + '">'+
       '<div class="window-module-title">' +
         '<span class="window-module-title-icon icon-lg icon-board"></span>' +
@@ -161,11 +161,11 @@ var insertSection = function (section) {
  * @param section - the section where the card will be inserted
  */
 var insertCard = function (card, section) {
-  var content = 
+  var content =
     '<div class="list-card-container">' +
       card.html +
-      '<p class="list-card-position quiet">' + 
-        card.board + 
+      '<p class="list-card-position quiet">' +
+        card.board +
       '</div>' +
     '</div>';
   $(mainContainer + ' ' + boardsContainer + '.' + section + ' .js-list').append(content);
@@ -192,7 +192,7 @@ var insertSortOption = function (callback) {
  */
 var bindSortDisplay = function () {
   if (sortIsDisplayed == false) {
-    if ($(sortPopoverContainer).hasClass('is-shown')) {
+    if ($(sortPopoverContainer).hasClass('is-shown') && $(sortPopoverContainer).find('.js-sort-by-board').length > 0) {
       insertSortOption(function () {
         sortIsDisplayed = true;
       });
@@ -217,12 +217,8 @@ if ($('body').has('.js-member-cards.active')) {
  * Listener : When the option is clicked
  */
 $('body').on('click', '.js-sort-by-step', function () {
-  boardsArray = [];
-  cardsArray = {
-    todo: [],
-    doing: [],
-    done: []
-  };
+  boardsArray = _boardsArray;
+  cardsArray = _cardsArray;
   createBoardsArray();
   $(sortPopoverContainer).removeClass('is-shown');
   $(sortPopoverContentContainer).empty();
