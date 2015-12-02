@@ -33,12 +33,12 @@ sections = {
 }
 
 // Boards
-boardsArray = [];
+_boardsArray = [];
 boardsContainer = '.window-module';
 boardTitle = '.window-module-title h3 a';
 
 // Cards
-cardsArray = {
+_cardsArray = {
   todo: [],
   doing: [],
   done: []
@@ -217,12 +217,8 @@ if ($('body').has('.js-member-cards.active')) {
  * Listener : When the option is clicked
  */
 $('body').on('click', '.js-sort-by-step', function () {
-  boardsArray = [];
-  cardsArray = {
-    todo: [],
-    doing: [],
-    done: []
-  };
+  boardsArray = _boardsArray;
+  cardsArray = _cardsArray;
   createBoardsArray();
   $(sortPopoverContainer).removeClass('is-shown');
   $(sortPopoverContentContainer).empty();
