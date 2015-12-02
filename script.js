@@ -143,7 +143,7 @@ var insertContent = function () {
  * @param section - the section to insert
  */
 var insertSection = function (section) {
-  var content =
+  var content = 
     '<div class="' + boardsContainer.replace('.', '') + ' ' + section + '">'+
       '<div class="window-module-title">' +
         '<span class="window-module-title-icon icon-lg icon-board"></span>' +
@@ -161,11 +161,11 @@ var insertSection = function (section) {
  * @param section - the section where the card will be inserted
  */
 var insertCard = function (card, section) {
-  var content =
+  var content = 
     '<div class="list-card-container">' +
       card.html +
-      '<p class="list-card-position quiet">' +
-        card.board +
+      '<p class="list-card-position quiet">' + 
+        card.board + 
       '</div>' +
     '</div>';
   $(mainContainer + ' ' + boardsContainer + '.' + section + ' .js-list').append(content);
@@ -192,7 +192,7 @@ var insertSortOption = function (callback) {
  */
 var bindSortDisplay = function () {
   if (sortIsDisplayed == false) {
-    if ($(sortPopoverContainer).hasClass('is-shown') && $(sortPopoverContainer).find('.js-sort-by-board').length > 0) {
+    if ($(sortPopoverContainer).hasClass('is-shown')) {
       insertSortOption(function () {
         sortIsDisplayed = true;
       });
