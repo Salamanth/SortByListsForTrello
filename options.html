@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Trello Sort Cards by Steps - Options</title>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+	<style>
+		html, body {
+			margin: 0;
+			background-color: #445160;
+			/*background-color: rgba(68, 81, 96, 0.1);*/
+			font-family: 'Open Sans', Arial, sans-serif;
+		}
+		.main {
+			width: 800px;
+			min-height: 100vh;
+			margin: 0 auto;
+			padding: 0;
+			background-color: #fff;
+			color: #797979;
+		}
+		.main header {
+			padding: 50px;
+			text-align: center;
+			/*background-color: #57a0d9;*/
+			/*background-color: rgba(87, 160, 217, 0.1);*/
+		}
+		.main header h1 {
+			margin: 0;
+			color: #57a0d9;
+			font-family: 'Open Sans', Arial, sans-serif;
+			font-weight: 600;
+		    font-size: 30px;
+		    letter-spacing: 3px;
+		    text-transform: uppercase;
+		}
+		.main header h2 {
+			margin-bottom: 0;
+			color: rgba(0, 0, 0, 0.4);
+			font-family: 'Open Sans', Arial, sans-serif;
+			font-size: 20px;
+			font-weight: 600;
+			letter-spacing: 10px;
+			text-transform: uppercase;
+		}
+		.main .content {
+			padding: 20px 50px;
+		}
+		.table-wrapper {
+			padding: 20px;
+			border: 2px solid #ddd;
+		}
+		.table-steps {
+			width: 100%;
+
+			border-collapse: collapse;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+		.table-steps td {
+		    padding: 10px;
+		}
+		.table-steps tr:nth-child(2n+1) > td {
+			background-color: #f9f9f9;
+		}
+		.table-steps input {
+		    background: #fff;
+		    border: 2px solid #ddd;
+		    padding: 5px 7px;
+		    font-size: 18px;
+		    line-height: 18px;
+		    -webkit-transition-duration: .2s;
+		    -o-transition-duration: .2s;
+		    transition-duration: .2s;
+		}
+		.table-steps input:focus,
+		.table-steps input:active {
+			border: 2px solid #57a0d9;
+			outline: none;
+		}
+	</style>
+</head>
+<body>
+
+	<div class="main">
+		<header>
+			<h1>Trello Sort cards by Steps</h1>
+			<h2>Options</h2>
+		</header>
+		<div class="content">
+			<h3>Edit Steps</h3>
+			<h4>
+				Here are the steps selected by the extension. You can :
+				<ul>
+					<li>Edit a step name : The name defines which Trello lists will be selected</li>
+					<li>Reorder steps : The order defines which step will appear first when you click on "order cards by steps"</li>
+					<li>Add a new step</li>
+					<li>Delete a step</li>
+				</ul>
+			</h4>
+			<div class="table-wrapper">
+				<table class="table-steps">
+					<tr>
+						<td>
+							<input type="text" placeholder="Todo" value="Todo" >
+						</td>
+						<td>
+							<a href="">Edit</a>
+							<a href="">Delete</a>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="text" placeholder="Doing" value="Doing" >
+						</td>
+						<td>
+							<a href="">Edit</a>
+							<a href="">Delete</a>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="text" placeholder="Done" value="Done" >
+						</td>
+						<td>
+							<a href="">Edit</a>
+							<a href="">Delete</a>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<button id="save">Add Step</button>
+
+			<div id="status"></div>
+			<button id="save">Save</button>
+		</div>
+	</div>
+
+	<script src="options.js"></script>
+</body>
+</html>
