@@ -2,9 +2,11 @@
   "manifest_version": 2,
 
   "name": "Trello Sort Cards by Steps",
-  "description": "Organizes cards by Kanban steps (Todo, Doing, Done) in Trello",
+  "description": "Organizes cards by custom steps in Trello",
   "version": "0.1",
   "icons": { "128": "icon.png" },
+
+  "options_page": "options.html",
 
   "content_scripts": [
     {

@@ -123,16 +123,16 @@ var insertContent = function () {
       insertCard($(this)[0], sections.sectionDone);
     });
   }
-  if (cardsArray.doing.length != 0) {
-    insertSection(sections.sectionDoing);
-    $.each (cardsArray.doing, function () {
-      insertCard($(this)[0], sections.sectionDoing);
-    });
-  }
   if (cardsArray.todo.length != 0) {
     insertSection(sections.sectionTodo);
     $.each (cardsArray.todo, function () {
       insertCard($(this)[0], sections.sectionTodo);
+    });
+  }
+  if (cardsArray.doing.length != 0) {
+    insertSection(sections.sectionDoing);
+    $.each (cardsArray.doing, function () {
+      insertCard($(this)[0], sections.sectionDoing);
     });
   }
 }
