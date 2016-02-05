@@ -78,6 +78,12 @@
 			border: 2px solid #57a0d9;
 			outline: none;
 		}
+
+		.regex-slash {
+			font-size: 18px;
+			font-weight: 600;
+			padding: 0 1px;
+		}
 	</style>
 </head>
 <body>
@@ -100,43 +106,17 @@
 			</h4>
 			<div class="table-wrapper">
 				<table class="table-steps">
-					<tr>
-						<td>
-							<input type="text" placeholder="Todo" value="Todo" >
-						</td>
-						<td>
-							<a href="">Edit</a>
-							<a href="">Delete</a>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input type="text" placeholder="Doing" value="Doing" >
-						</td>
-						<td>
-							<a href="">Edit</a>
-							<a href="">Delete</a>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input type="text" placeholder="Done" value="Done" >
-						</td>
-						<td>
-							<a href="">Edit</a>
-							<a href="">Delete</a>
-						</td>
-					</tr>
 				</table>
 			</div>
 
-			<button id="save">Add Step</button>
+			<button class="add-step">Add Step</button>
 
-			<div id="status"></div>
-			<button id="save">Save</button>
+			<div class="status"></div>
+			<button class="get-steps">Afficher Data</button>
 		</div>
 	</div>
 
+	<script src="jquery-1.11.3.min.js"></script>
 	<script src="options.js"></script>
 </body>
 </html>
