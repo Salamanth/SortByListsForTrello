@@ -193,7 +193,7 @@ var insertSortOption = function (callback) {
 var bindSortDisplay = function () {
   if (sortIsDisplayed == false) {
     if ($(sortPopoverContainer).hasClass('is-shown') && $(sortPopoverContainer).find('.js-sort-by-board').length > 0) {
-      insertSortOption(function () {
+      insertSortOption( function () {
         sortIsDisplayed = true;
       });
     }
