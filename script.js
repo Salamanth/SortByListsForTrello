@@ -43,6 +43,7 @@ _cardsArray = {
   doing: [],
   done: []
 };
+cardsArray = [];
 cardsContainer = '.js-list';
 cardContainer = '.list-card-container';
 cardContentContainer = '.js-card';
@@ -51,12 +52,16 @@ cardListContainer = 'strong';
 cardNewContainer = '.list-card';
 cardLink = 'a.list-card-title';
 
+// Storage
+_storageSteps = [];
+_defaultSteps = ['Todo', 'Doing', 'Done'];
+
 
 /**
  * Creates an array containing every board info
  */
-var createBoardsArray = function () {
-  $(mainContainer + ' ' + boardsContainer).each( function () {
+var createBoardsArray = function (callback) {
+  $(mainContainer + ' ' + boardsContainer).each ( function () {
     // Saving board info
     var board = {
       title: $(this).find($(boardTitle)).html()
@@ -67,7 +72,7 @@ var createBoardsArray = function () {
     createCardsArray($(this));
   });
   // Inserting the cards in the DOM
-  insertContent();
+  callback();
 }
 
 
@@ -76,8 +81,8 @@ var createBoardsArray = function () {
  * @param board - the parent board containing the cards
  */
 var createCardsArray = function (board) {
-  board.find($(cardsContainer)).each( function () {
-    $(this).find($(cardContainer)).each( function() {
+  board.find($(cardsContainer)).each ( function () {
+    $(this).find($(cardContainer)).each ( function() {
       // console.log($(this));
       // Setting card's board name
       var cardList = $(this).find($(cardListContainer)).html().toLowerCase();
@@ -93,18 +98,14 @@ var createCardsArray = function (board) {
       };
       // Getting the card's status (todo, doing, done)
       // And pushing card to the cards array
-      if (cardList.indexOf(sections.sectionTodo) >= 0) {
-        // console.log('TODO');
-        cardsArray.todo.push(card);
-      }
-      else if (cardList.indexOf(sections.sectionDoing) >= 0) {
-        // console.log('DOING');
-        cardsArray.doing.push(card);
-      }
-      else if (cardList.indexOf(sections.sectionDone) >= 0) {
-        // console.log('DONE');
-        cardsArray.done.push(card);
-      }
+      $.each (_storageSteps, function (index, value) {
+        // Regexp to test if the cards match the steps
+        var regexp = new RegExp('(.)*' + value + '(.)*', 'i');
+        var match = regexp.exec(cardList);
+        if (match) {
+          cardsArray[index].push(card);
+        }
+      });
     });
   });
 }
@@ -117,24 +118,13 @@ var insertContent = function () {
   // Emptying the main container
   $(mainContainer).empty();
   // Prepending sections & Inserting Cards
-  if (cardsArray.done.length != 0) {
-    insertSection(sections.sectionDone);
-    $.each (cardsArray.done, function () {
-      insertCard($(this)[0], sections.sectionDone);
+  // console.log(cardsArray);
+  $.each (cardsArray, function (index, value) {
+    insertSection(index, _storageSteps[index]);
+    $.each (value, function () {
+      insertCard($(this)[0], index);
     });
-  }
-  if (cardsArray.todo.length != 0) {
-    insertSection(sections.sectionTodo);
-    $.each (cardsArray.todo, function () {
-      insertCard($(this)[0], sections.sectionTodo);
-    });
-  }
-  if (cardsArray.doing.length != 0) {
-    insertSection(sections.sectionDoing);
-    $.each (cardsArray.doing, function () {
-      insertCard($(this)[0], sections.sectionDoing);
-    });
-  }
+  });
 }
 
 
@@ -142,12 +132,12 @@ var insertContent = function () {
  * Inserts a section in the main container
  * @param section - the section to insert
  */
-var insertSection = function (section) {
+var insertSection = function (index, value) {
   var content =
-    '<div class="' + boardsContainer.replace('.', '') + ' ' + section + '">'+
+    '<div class="' + boardsContainer.replace('.', '') + ' sort-cards-by-steps-' + index + '">' +
       '<div class="window-module-title">' +
         '<span class="window-module-title-icon icon-lg icon-board"></span>' +
-        '<h3><a href="#">' + section.toUpperCase() + '</a></h3>' +
+        '<h3><a href="#">' + value.toString().toUpperCase() + '</a></h3>' +
       '</div>' +
       '<div class="u-gutter float-cards u-clearfix js-list"></div>' +
     '</div>';
@@ -168,7 +158,7 @@ var insertCard = function (card, section) {
         card.board +
       '</div>' +
     '</div>';
-  $(mainContainer + ' ' + boardsContainer + '.' + section + ' .js-list').append(content);
+  $(mainContainer + ' ' + boardsContainer + '.sort-cards-by-steps-' + section + ' .js-list').append(content);
 }
 
 
@@ -206,6 +196,35 @@ var bindSortDisplay = function () {
 
 
 /**
+ * Creates the children steps Arrays in cardsArray
+ */
+var initCardsArray = function (callback) {
+  // Init of the cardsArray children
+  $.each (_storageSteps, function (index, value) {
+    if (typeof cardsArray[index] === 'undefined' || cardsArray[index].length == 0) {
+      cardsArray[index] = [];
+    }
+  });
+  callback();
+}
+
+
+/**
+ * Get saved steps in Chrome storage
+ */
+var setSteps = function (callback) {
+  chrome.storage.sync.get( function (data) {
+    _storageSteps = data.steps;
+    // Default steps
+    if (typeof _storageSteps === 'undefined' || _storageSteps.length == 0) {
+      _storageSteps = _defaultSteps;
+    }
+    callback();
+  });
+}
+
+
+/**
  * Main Listener
  */
 if ($('body').has('.js-member-cards.active')) {
@@ -218,8 +237,15 @@ if ($('body').has('.js-member-cards.active')) {
  */
 $('body').on('click', '.js-sort-by-step', function () {
   boardsArray = _boardsArray;
-  cardsArray = _cardsArray;
-  createBoardsArray();
+  setSteps( function () {
+    initCardsArray( function () {
+      createBoardsArray( function () {
+        cardsArray.reverse();
+        _storageSteps.reverse();
+        insertContent();
+      });
+    });
+  });
   $(sortPopoverContainer).removeClass('is-shown');
   $(sortPopoverContentContainer).empty();
   $(sortMainContainer + ' ' + sortLabelContainer).html(langSortShortLabel);

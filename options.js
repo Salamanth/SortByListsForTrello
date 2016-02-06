@@ -11,7 +11,7 @@
 
 _domSteps = [];
 _storageSteps = [];
-_defaultSteps = ['(.)*Todo(.)*', '(.)*Doing(.)*', '(.)*Done(.)*'];
+_defaultSteps = ['Todo', 'Doing', 'Done'];
 
 steps = [];
 
@@ -19,7 +19,7 @@ steps = [];
  * Creates a new step
  */
 var createStep = function () {
-	$('.table-steps').append('<tr><td><span class="regex-slash">/</span><input type="text" class="step-regex" placeholder="Step Regex" value="(.)*Step(.)*" ><span class="regex-slash">/</span></td><td><a href="" class="delete-step">Delete</a></td></tr>');
+	$('.table-steps').append('<tr><td><span class="regex-slash">/</span><input type="text" class="step-regex" placeholder="Step Regex" value="Step" ><span class="regex-slash">/</span></td><td><a href="" class="delete-step">Delete</a></td></tr>');
 	saveSteps();
 }
 
@@ -45,7 +45,6 @@ var saveSteps = function () {
 	chrome.storage.sync.set({steps: _domSteps}, function () {
 		console.log('Steps Saved');
 		_domSteps = [];
-		// setSteps();
 	});
 }
 
@@ -57,7 +56,7 @@ var setSteps = function (callback) {
 	chrome.storage.sync.get( function (data) {
 		_storageSteps = data.steps;
 		// Default steps
-		if (_storageSteps.length == 0) {
+		if (typeof _storageSteps === 'undefined' || _storageSteps.length == 0) {
 			_storageSteps = _defaultSteps;
 		}
 		callback();
@@ -69,6 +68,7 @@ var setSteps = function (callback) {
  * Inits saved steps in the main Array
  */
 var initSteps = function () {
+	console.log(_storageSteps);
 	$.each(_storageSteps, function (index, value) {
 		$('.table-steps').append('<tr><td><span class="regex-slash">/</span><input type="text" class="step-regex" placeholder="Step Regex" value="' + value + '" ><span class="regex-slash">/</span></td><td><a href="" class="delete-step">Delete</a></td></tr>');
 	});
@@ -79,13 +79,9 @@ var initSteps = function () {
  * Main Init
  */
 $(document).ready( function () {
-	if (_storageSteps.length == 0) {
-		setSteps( function () {
-			initSteps();
-		});
-	} else {
+	setSteps( function () {
 		initSteps();
-	}
+	});
 });
 
 
@@ -113,16 +109,6 @@ $('body').on('click', '.delete-step', function (e) {
 $('body').on('keyup', '.step-regex', function (e) {
 	saveSteps();
 });
-
-
-
-
-
-// AFFICHER LE TABLEAU EN FONCTION DES STEPS SAUVEGARDES
-// COMMENT INITIALISER LES DONNES PAR DEFAUT ?
-
-
-
 
 
 /**
