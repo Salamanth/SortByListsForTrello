@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Trello Sort Cards by Steps",
-  "description": "Organizes cards by custom steps in Trello",
+  "description": "Sort your cards by custom steps in Trello",
   "version": "0.1",
   "icons": { "128": "icon.png" },
 
