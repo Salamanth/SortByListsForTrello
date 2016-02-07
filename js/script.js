@@ -10,8 +10,8 @@
  */
 
 // Lang
-langSortLabel = 'Sort by tags';
-langSortShortLabel = 'tags';
+langSortLabel = 'Sort by lists';
+langSortShortLabel = 'lists';
 
  // Main
 mainContainer = '.js-cards-content';

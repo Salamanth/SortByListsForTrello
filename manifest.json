@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "Trello Sort Cards by Tags",
-  "description": "Sort your cards by custom tags in Trello",
+  "name": "Sort by Lists for Trello",
+  "description": "Sort your cards by lists in Trello",
   "version": "0.1",
 
   "icons": { "128": "icon.png" },
@@ -11,7 +11,7 @@
   "content_scripts": [
     {
       "matches": ["https://trello.com/*"],
-      "js": ["js/jquery-1.11.3.min.js","js/sortable.min.js", "js/script.js", "js/options.js"]
+      "js": ["js/jquery-1.11.3.min.js", "js/sortable.min.js", "js/script.js", "js/options.js"]
     }
   ],
 
