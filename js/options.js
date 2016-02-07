@@ -15,11 +15,12 @@ _defaultSteps = ['Todo', 'Doing', 'Done'];
 
 steps = [];
 
+
 /**
  * Creates a new step
  */
 var createStep = function () {
-	$('.table-steps').append('<tr><td><span class="regex-slash">/</span><input type="text" class="step-regex" placeholder="Step Regex" value="Step" ><span class="regex-slash">/</span></td><td><a href="" class="delete-step">Delete</a></td></tr>');
+	$('#steps-list').append('<li><span class="drag-handle"><i class="drag-line"></i><i class="drag-line"></i><i class="drag-line"></i></span><input type="text" class="step-regex" placeholder="Step Regex" value="Step"><i class="delete-step">&times;</i></li>');
 	saveSteps();
 }
 
@@ -29,7 +30,7 @@ var createStep = function () {
  * @param step - the step to delete
  */
 var deleteStep = function (step) {
-	step.closest('tr').remove();
+	step.closest('li').remove();
 	saveSteps();
 }
 
@@ -38,9 +39,11 @@ var deleteStep = function (step) {
  * Save steps in Chrome storage
  */
 var saveSteps = function () {
-	$('.table-steps tr').each( function () {
-		var regex = $(this).find('.step-regex').val();
-		_domSteps.push(regex);
+	$('#steps-list li').each( function () {
+		var value = $(this).find('.step-regex').val();
+		if (value.length != 0) {
+			_domSteps.push(value);
+		}
 	});
 	chrome.storage.sync.set({steps: _domSteps}, function () {
 		console.log('Steps Saved');
@@ -68,9 +71,8 @@ var setSteps = function (callback) {
  * Inits saved steps in the main Array
  */
 var initSteps = function () {
-	console.log(_storageSteps);
 	$.each(_storageSteps, function (index, value) {
-		$('.table-steps').append('<tr><td><span class="regex-slash">/</span><input type="text" class="step-regex" placeholder="Step Regex" value="' + value + '" ><span class="regex-slash">/</span></td><td><a href="" class="delete-step">Delete</a></td></tr>');
+		$('#steps-list').append('<li><span class="drag-handle"><i class="drag-line"></i><i class="drag-line"></i><i class="drag-line"></i></span><input type="text" class="step-regex" placeholder="Step Regex" value="' + value + '"><i class="delete-step">&times;</i></li>');
 	});
 }
 
@@ -79,6 +81,17 @@ var initSteps = function () {
  * Main Init
  */
 $(document).ready( function () {
+	// Sortable list
+	var sortable = new Sortable(document.getElementById('steps-list'), {
+		ghostClass: "sortable-ghost",
+		chosenClass: "sortable-chosen",
+		animation: 150,
+		handle: ".drag-handle",
+		onEnd: function (e) {
+      saveSteps();
+    },
+	});
+	// Steps Initalisation
 	setSteps( function () {
 		initSteps();
 	});
@@ -117,4 +130,3 @@ $('body').on('keyup', '.step-regex', function (e) {
 $('body').on('click', '.get-steps', function (e) {
 	setSteps();
 });
-

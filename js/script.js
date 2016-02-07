@@ -25,24 +25,12 @@ sortPopoverContainer = '.pop-over';
 sortPopoverContentContainer = '.pop-over-content';
 sortPopoverListContainer = '.pop-over-list';
 
- // Sections
-sections = {
-  sectionTodo: 'todo',
-  sectionDoing: 'doing',
-  sectionDone: 'done'
-}
-
 // Boards
 _boardsArray = [];
 boardsContainer = '.window-module';
 boardTitle = '.window-module-title h3 a';
 
 // Cards
-_cardsArray = {
-  todo: [],
-  doing: [],
-  done: []
-};
 cardsArray = [];
 cardsContainer = '.js-list';
 cardContainer = '.list-card-container';
@@ -199,6 +187,7 @@ var bindSortDisplay = function () {
  * Creates the children steps Arrays in cardsArray
  */
 var initCardsArray = function (callback) {
+  cardsArray = [];
   // Init of the cardsArray children
   $.each (_storageSteps, function (index, value) {
     if (typeof cardsArray[index] === 'undefined' || cardsArray[index].length == 0) {
