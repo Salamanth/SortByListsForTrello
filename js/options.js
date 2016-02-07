@@ -21,6 +21,8 @@ steps = [];
  */
 var createStep = function () {
 	$('#steps-list').append('<li><span class="drag-handle" title="Move step"><i class="drag-line"></i><i class="drag-line"></i><i class="drag-line"></i></span><input type="text" title="Edit step" class="step-regex" placeholder="Step Regex" value="Step"><i class="delete-step" title="Delete step">&times;</i></li>');
+	var newStep = $('#steps-list li:last-child input');
+	newStep.focus().val(newStep.val());
 	saveSteps();
 }
 
