@@ -10,8 +10,8 @@
  */
 
 // Lang
-langSortLabel = 'Trier par étapes';
-langSortShortLabel = 'étapes';
+langSortLabel = 'Sort by tags';
+langSortShortLabel = 'tags';
 
  // Main
 mainContainer = '.js-cards-content';

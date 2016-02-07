@@ -1,11 +1,11 @@
 {
   "manifest_version": 2,
 
-  "name": "Trello Sort Cards by Steps",
-  "description": "Sort your cards by custom steps in Trello",
+  "name": "Trello Sort Cards by Tags",
+  "description": "Sort your cards by custom tags in Trello",
   "version": "0.1",
-  "icons": { "128": "icon.png" },
 
+  "icons": { "128": "icon.png" },
   "options_page": "options.html",
 
   "content_scripts": [

@@ -20,7 +20,7 @@ steps = [];
  * Creates a new step
  */
 var createStep = function () {
-	$('#steps-list').append('<li><span class="drag-handle" title="Move step"><i class="drag-line"></i><i class="drag-line"></i><i class="drag-line"></i></span><input type="text" title="Edit step" class="step-regex" placeholder="Step Regex" value="Step"><i class="delete-step" title="Delete step">&times;</i></li>');
+	$('#steps-list').append('<li><span class="drag-handle" title="Move tag"><i class="drag-line"></i><i class="drag-line"></i><i class="drag-line"></i></span><input type="text" title="Edit tag" class="step-regex" placeholder="Tag name" value="Step"><i class="delete-step" title="Delete tag">&times;</i></li>');
 	var newStep = $('#steps-list li:last-child input');
 	newStep.focus().val(newStep.val());
 	saveSteps();
@@ -74,7 +74,7 @@ var setSteps = function (callback) {
  */
 var initSteps = function () {
 	$.each(_storageSteps, function (index, value) {
-		$('#steps-list').append('<li><span class="drag-handle" title="Move step"><i class="drag-line"></i><i class="drag-line"></i><i class="drag-line"></i></span><input type="text" title="Edit step" class="step-regex" placeholder="Step Regex" value="' + value + '"><i class="delete-step" title="Delete step">&times;</i></li>');
+		$('#steps-list').append('<li><span class="drag-handle" title="Move tag"><i class="drag-line"></i><i class="drag-line"></i><i class="drag-line"></i></span><input type="text" title="Edit tag" class="step-regex" placeholder="Tag name" value="' + value + '"><i class="delete-step" title="Delete tag">&times;</i></li>');
 	});
 }
 
