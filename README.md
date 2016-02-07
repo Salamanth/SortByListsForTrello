@@ -1,2 +1,2 @@
-# TrelloSortCardsBySteps
-Chrome extension for Trello : Organizes cards by steps 
+# TrelloSortCardsByTags
+Chrome extension : Sort your cards by custom tags in Trello
