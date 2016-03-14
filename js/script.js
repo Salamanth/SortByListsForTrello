@@ -33,7 +33,7 @@ boardTitle = '.window-module-title h3 a';
 // Cards
 cardsArray = [];
 cardsContainer = '.js-list';
-cardContainer = '.list-card-container';
+cardContainer = '.card-grid-container';
 cardContentContainer = '.js-card';
 cardListParentContainer = '.list-card-position';
 cardListContainer = 'strong';
@@ -140,10 +140,12 @@ var insertSection = function (index, value) {
  */
 var insertCard = function (card, section) {
   var content =
-    '<div class="list-card-container">' +
-      card.html +
-      '<p class="list-card-position quiet">' +
-        card.board +
+    '<div class="card-grid-container">' +
+      '<div class="js-card">' +
+        card.html +
+        '<p class="list-card-position quiet">' +
+          card.board +
+        '</div>' +
       '</div>' +
     '</div>';
   $(mainContainer + ' ' + boardsContainer + '.sort-cards-by-steps-' + section + ' .js-list').append(content);
